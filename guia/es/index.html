@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>copilot-agentes-kit — Kit práctico de Copilot + Agentes para Empresas</title>
+<meta content="Modelos listos (canvas, prompts, instrucciones de agente, flujos, gobernanza, indicadores, plan de tres fases) para usar Copilot, Copilot Studio, Power Automate y Power BI en procesos reales — más dos herramientas de verificación para cursos INEMA v5." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  .card ul{margin:.4em 0 0;padding-left:1.1em;color:var(--mut);font-size:.9rem}
+  .card ul li{margin:.2em 0}
+  .card a{font-weight:600}
+</style>
+<link href="https://inematds.github.io/copilot-agentes-kit/guia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/copilot-agentes-kit/guia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/copilot-agentes-kit/guia/es/" hreflang="es" rel="alternate"/></head>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="./" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<nav><div class="wrap">
+<a class="brand" href="#top"><span class="emoji">🧰</span> copilot-agentes-kit</a>
+<span class="sep">|</span>
+<span class="clubpro">
+<a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
+<span class="sep">-</span>
+<a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a>
+</span>
+<div class="links">
+<a class="sec" href="#oque">Qué es</a>
+<a class="sec" href="#fluxo">Cómo funciona</a>
+<a class="sec" href="#kit">El kit</a>
+<a class="sec" href="#guia">Guía de uso</a>
+<a class="sec" href="#exemplos">Ejemplos</a>
+<a class="sec" href="#roadmap">Roadmap</a>
+<button aria-label="Cambiar tema" class="tgl" id="themeToggle" title="Cambiar tema">🌙</button>
+<a class="btn" href="https://github.com/inematds/copilot-agentes-kit" rel="noopener" target="_blank">GitHub</a>
+</div>
+</div></nav>
+<header class="hero" id="top">
+<div class="glow"></div>
+<div class="wrap">
+<div>
+<span class="chip">Kit práctico · Copilot + Agentes para Empresas</span>
+<h1>Lo que te llevas a la <span class="amb">lunes</span></h1>
+<p class="lead">Canvas, prompts, instrucciones de agente, flujos, listas de verificación de integración y gobernanza, fichas de indicadores y plan de tres fases: listos para copiar y usar con Copilot, Copilot Studio, Power Automate y Power BI. Dos herramientas más para quienes crean cursos INEMA v5.</p>
+<div class="cta">
+<a class="btn" href="#guia">Empezar la guía</a>
+<a class="btn ghost" href="https://github.com/inematds/copilot-agentes-kit" rel="noopener" target="_blank">Ver en GitHub</a>
+<a class="btn ghost" href="https://inematds.github.io/copilot-agentic/" rel="noopener" target="_blank">Curso de origen</a>
+</div>
+</div>
+<figure><img alt="Escritorio con un cuaderno de listas de verificación, una laptop que muestra un flujo de aprobación y un panel de indicadores" src="../assets/hero.jpg"/></figure>
+</div>
+</header>
+<section id="oque"><div class="wrap">
+<span class="chip">Qué es</span>
+<h2>Modelos para el trabajo + verificación para cursos</h2>
+<p class="sub">Nació del curso <a href="https://inematds.github.io/copilot-agentic/" rel="noopener" target="_blank">Copilot + Agentes para Empresas</a> (INEMA.CLUB PRO, 9 clases). El curso enseña; el kit ofrece lo que la persona copia. Las herramientas son lo que quedó de útil de la producción del propio curso.</p>
+<div class="grid g3">
+<div class="card"><h3>📋 Kit de modelos (10 archivos)</h3><p>Markdown, en portugués, sin código. Canvas de automatización con agentes, prompts del día a día, prompts de datos, instrucciones de agente, anatomía de flujos, regla de las cuatro elecciones, siete revisiones de gobernanza, ficha de indicador, plan de tres fases, los cinco escalones.</p></div>
+<div class="card"><h3>🔎 check-v5.py</h3><p>Verificador por clase para el formato-curso v5: tiempo estimado vs. declarado, jerga centinela, cobertura de figuras, recuentos del portón, ant duplicación recap ↔ tarjetas, emoji y doble signo de exclamación. Solo Python 3, sin dependencias.</p></div>
+<div class="card"><h3>🧪 browser-test.cjs</h3><p>Prueba headless del motor (Playwright): enrutador, tiempo, figuras en el celular, quiz, práctica, progreso, paneles, tema, persistencia y landing. Termina en <code>ERROS: nenhum</code> o señala qué falló.</p></div>
+</div>
+</div></section>
+<section id="fluxo"><div class="wrap">
+<span class="chip">Cómo funciona</span>
+<h2>Un proceso a la vez, en este orden</h2>
+<p class="sub">El orden sugerido para un primer proyecto de agente en una empresa. Cada etapa tiene un archivo del kit; los prompts (del día a día y de datos) se incorporan desde el primer día.</p>
+<div class="flow">
+<span>10 · cinco peldaños</span><span class="arr">→</span>
+<span>01 · canvas</span><span class="arr">→</span>
+<span>04 · agente</span><span class="arr">→</span>
+<span>05 · flujo</span><span class="arr">→</span>
+<span>06 · integración</span><span class="arr">→</span>
+<span>08 · indicador</span><span class="arr">→</span>
+<span>07 · gobernanza</span><span class="arr">→</span>
+<span>09 · plan de 3 fases</span>
+</div>
+<div class="grid g4" style="margin-top:26px">
+<div class="card"><div class="num">1</div><h3>Diseñar</h3><p>Ubicar el trabajo en los cinco peldaños y completar el canvas de nueve campos con nombres reales.</p></div>
+<div class="card"><div class="num">2</div><h3>Construir</h3><p>Agente en Copilot Studio (instrucciones + conocimiento), flujo en Power Automate (aprobación, registro, aviso de error), integración por la mejor vía.</p></div>
+<div class="card"><div class="num">3</div><h3>Medir</h3><p>Tres indicadores con meta, responsable y fuente automática; Copilot explica la desviación; la alerta avisa al gestor.</p></div>
+<div class="card"><div class="num">4</div><h3>Publicar con gobernanza</h3><p>Siete revisiones antes de salir del borrador y un plan de tres fases con criterio de listo.</p></div>
+</div>
+</div></section>
+<section id="kit"><div class="wrap">
+<span class="chip">El kit</span>
+<h2>Los diez archivos</h2>
+<p class="sub">Copia el bloque, cambia lo que está entre <code>&lt; &gt;</code>. Los casos (técnica de seguridad laboral, analista de compras, gerente de RR. HH., coordinador financiero) son ficticios.</p>
+<div class="grid g2">
+<div class="card"><h3>10 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/10-os-cinco-degraus.md" rel="noopener" target="_blank">Los cinco escalones</a></h3><p>Usuario → aumentado → diseñador de workflows → constructor de agentes → automatizador. El modelo mental Persona → Agente → Sistemas y el filtro de las tres primeras tareas.</p></div>
+<div class="card"><h3>01 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/01-canvas-automacao-com-agentes.md" rel="noopener" target="_blank">Canvas de automatización con agentes</a></h3><p>Nueve campos en una página, ejemplo completado (conciliación de pagos) y la distribución agente / flujo / pantalla / indicador.</p></div>
+<div class="card"><h3>02 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/02-prompts-copilot-dia-a-dia.md" rel="noopener" target="_blank">Prompts del día a día</a></h3><p>Búsqueda que cruza fuentes, correo largo → decidido / pendiente / quién no respondió, reunión → decisiones, responsables y plazos, documento y presentación.</p></div>
+<div class="card"><h3>03 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/03-prompts-dados-que-explicam.md" rel="noopener" target="_blank">Datos que explican</a></h3><p>Excel, Analyst y Researcher: «qué cambió y por qué», hipótesis comprobable entre archivos, investigación interna y externa, las tres revisiones de dos minutos.</p></div>
+<div class="card"><h3>04 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/04-instrucoes-de-agente-copilot-studio.md" rel="noopener" target="_blank">Instrucciones de agente</a></h3><p>Modelo papel · alcance · reglas · tono para Copilot Studio, lista de verificación para la creación en seis pasos y mantenimiento semanal.</p></div>
+<div class="card"><h3>05 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/05-fluxos-power-automate.md" rel="noopener" target="_blank">Flujos en Power Automate</a></h3><p>Aprobación, documento por vencer y caso llamado por el agente: siempre con registro y aviso de error.</p></div>
+<div class="card"><h3>06 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/06-quatro-escolhas-e-checklist-de-tela.md" rel="noopener" target="_blank">Cuatro opciones y checklist de pantalla</a></h3><p>Conector → flujo → automatización de pantalla → Computer Use; registro de proveedor de principio a fin; caso con respuestas.</p></div>
+<div class="card"><h3>07 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/07-governanca-e-lista-de-riscos.md" rel="noopener" target="_blank">Gobernanza y lista de riesgos</a></h3><p>Siete revisiones antes de publicar, dónde es obligatoria la participación de una persona, argumento para la dirección, minic caso del uso compartido excesivo.</p></div>
+<div class="card"><h3>08 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/08-indicadores-meta-desvio-acao.md" rel="noopener" target="_blank">Indicadores</a></h3><p>Ficha de indicador, solicitud a Copilot para explicar una desviación, panel mínimo en cinco pasos, base de datos por área, preguntas que un gerente debería poder hacer.</p></div>
+<div class="card"><h3>09 · <a href="https://github.com/inematds/copilot-agentes-kit/blob/main/kit/09-plano-de-tres-fases-e-roadmap.md" rel="noopener" target="_blank">Plan de tres fases y hoja de ruta</a></h3><p>Prototipo → ejecución → escala con criterio de listo, los cuatro laboratorios, casos por departamento, roadmap de la empresa en nueve fases.</p></div>
+</div>
+</div></section>
+<section id="pre"><div class="wrap">
+<span class="chip">Requisitos previos</span>
+<h2>Casi nada</h2>
+<p class="sub">El kit es texto: solo necesitas que la empresa habilite Copilot. Las herramientas requieren Python 3 y, para probar el motor, Node con Playwright.</p>
+<div class="grid g3">
+<div class="card"><h3>Para el kit</h3><p>Microsoft 365 Copilot en la cuenta de trabajo. Copilot Studio y Power Automate para los modelos 04 y 05 (si no tienes acceso, los modelos se convierten en la especificación que solicitará el área de TI).</p><pre><span class="c"># nada que instalar</span>
+<span class="k">git clone</span> <span class="s">https://github.com/inematds/copilot-agentes-kit</span></pre></div>
+<div class="card"><h3>Para check-v5.py</h3><p>Python 3 estándar. Sin paquetes adicionales.</p><pre><span class="k">python3 --version</span>  <span class="c"># 3.8 o más</span></pre></div>
+<div class="card"><h3>Para browser-test.cjs</h3><p>Node 18+ y Playwright con Chromium (o un Playwright ya instalado en otro lugar, mediante <code>PLAYWRIGHT_DIR</code>).</p><pre><span class="k">npm i -D playwright</span>
+<span class="k">npx playwright install chromium</span></pre></div>
+</div>
+</div></section>
+<section id="guia"><div class="wrap">
+<span class="chip">Guía de uso · paso a paso</span>
+<h2>Del clon al primer proyecto</h2>
+<p class="sub">Los pasos 1 a 4 son para quienes usarán el kit en el trabajo. Los pasos 5 a 7 son para quienes crean cursos INEMA v5.</p>
+<div class="step"><div class="b">1</div><div>
+<h3>Clona (o descarga el zip) y abre la carpeta <code>kit/</code></h3>
+<p>Diez archivos markdown. Lee primero el 10 (cinco minutos) para situar tu trabajo en los cinco escalones.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/copilot-agentes-kit</span>
+<span class="k">cd</span> copilot-agentes-kit/kit &amp;&amp; ls  <span class="c"># 01 … 10</span></pre>
+</div></div>
+<div class="step"><div class="b">2</div><div>
+<h3>Usa los prompts en el Copilot de la empresa hoy</h3>
+<p>Abre <code>02-prompts-copilot-dia-a-dia.md</code>, copia el bloque de la reunión, cambia lo que está entre <code>&lt; &gt;</code> y pégalo en Copilot de Teams. Regla que aplica a todos: tema con nombre propio + período + lo que quieres ver al final.</p>
+<pre>Use a reunião <span class="s">&lt;nome e data&gt;</span>. Faça, nesta ordem:
+1. Resumo em até 10 linhas.  2. Decisões, sem "talvez".
+3. Para cada decisão: responsável (um nome), tarefa e prazo.
+4. Pendências sem responsável.  5. Mensagem de acompanhamento cobrando com prazo.</pre>
+</div></div>
+<div class="step"><div class="b">3</div><div>
+<h3>Completa el canvas de un proceso real</h3>
+<p><code>01-canvas-automacao-com-agentes.md</code>: nueve campos, doce minutos, nombres reales. Marca con ✱ las decisiones que pasan por la lista de riesgos (archivo 07). «Aún no lo sé» sirve en el campo Integración; el archivo 06 lo resuelve después.</p>
+<pre>CANVAS — <span class="s">&lt;nome do processo&gt;</span>
+Objetivo · Entradas · Conhecimento · Decisões (✱ humanas) · Ações
+Integração · Validação · Indicadores</pre>
+</div></div>
+<div class="step"><div class="b">4</div><div>
+<h3>Construye, mide y publica con gobernanza</h3>
+<p>Agente en borrador con la plantilla del archivo 04 (prueba con tres preguntas, una fuera del alcance). Flujo de aprobación con el archivo 05 (registro + aviso de error). Tres indicadores con el archivo 08. Antes de publicar, las siete verificaciones del archivo 07. Presenta con el plan de tres fases del archivo 09.</p>
+<pre><span class="c"># orden sugerido</span>
+10 → 01 → 04 → 05 → 06 → 08 → 07 → 09</pre>
+</div></div>
+<div class="step"><div class="b">5</div><div>
+<h3>Verificar un curso v5, clase por clase</h3>
+<p>Escribe cada lección en un archivo (<code>parts/NN-aula.html</code>) y ejecuta el verificador al cerrar cada una. Imprime el tiempo estimado, el término centinela con contexto, los conteos de la puerta y la verificación antirrepetición recap ↔ tarjetas. Solo después concatena.</p>
+<pre><span class="k">python3</span> tools/check-v5.py parts/01-aula.html
+<span class="c">#   palabras=1880 quiz=1 práctica~10min → estimado 20min | data-tempo=20</span>
+<span class="c">#   steps=5 figs=5 … manifesto=1 AUSENTE=0</span>
+<span class="c">#   DUPLICACIÓN ≥6: …   ← si aparece, reescribe la tarjeta</span>
+<span class="k">cat</span> parts/*.html &gt; curso.html</pre>
+</div></div>
+<div class="step"><div class="b">6</div><div>
+<h3>Demostrar que el motor está activo</h3>
+<p>Abre <code>curso.html</code> e <code>landing.html</code> en un Chromium sin ventana, cierra el onboarding, navega, haz clic en el quiz y en la práctica, abre los paneles, cambia el tema, recarga y prueba en el celular. Toma screenshots en la carpeta indicada.</p>
+<pre><span class="k">node</span> tools/browser-test.cjs /caminho/do/curso shots
+<span class="c"># … statcards: 0/9 clases completadas ~203min restantes</span>
+<span class="c"># … mobile body scrollWidth ok: true</span>
+<span class="c"># ERRORES: ninguno</span>
+<span class="c"># ¿Playwright en otro lugar? PLAYWRIGHT_DIR=/x/node_modules/playwright node tools/browser-test.cjs …</span></pre>
+</div></div>
+<div class="step"><div class="b">7</div><div>
+<h3>Publicar el curso</h3>
+<p>Portada con la skill <code>capa-inema</code>, <code>index.html</code> con redirect a la landing, <code>.nojekyll</code>, push y GitHub Pages. Catálogo con la skill <code>atualiza-portal</code>.</p>
+<pre><span class="k">node</span> ~/.claude/skills/capa-inema/assets/gerar-capa.cjs --repo . --title <span class="s">"Título"</span> --cat <span class="s">"Categoria"</span>
+<span class="k">git push</span> &amp;&amp; <span class="k">gh api</span> -X POST repos/inematds/&lt;repo&gt;/pages -f <span class="s">'source[branch]=main'</span> -f <span class="s">'source[path]=/'</span></pre>
+</div></div>
+</div></section>
+<section id="exemplos"><div class="wrap">
+<span class="chip">Ejemplos</span>
+<h2>El curso que verificó el kit</h2>
+<p class="sub">Las dos herramientas se ejecutaron sobre el curso de origen: nueve clases, manifiesto 100% conforme, cero errores de consola.</p>
+<div class="ex">
+<figure><img alt="Inicio de la clase 1 del curso Copilot + Agentes para Empresas: promesa, tiempo e imagen de la escalera de cinco peldaños" src="../assets/ex1.jpg"/><figcaption>Clase 1 del curso de origen: promesa verificable, tiempo de 20 min renderizado por el motor (el mismo que estimó check-v5) y la metáfora de los cinco peldaños.</figcaption></figure>
+<figure><img alt="Cuadro Aplicando a tus áreas de la clase 7 y la figura de la escalera de las cuatro opciones" src="../assets/ex2.jpg"/><figcaption>Clase 7: el cuadro con tres profesiones y la escalera de las cuatro opciones, el mismo contenido del archivo 06 del kit en la versión del curso.</figcaption></figure>
+</div>
+</div></section>
+<section id="roadmap"><div class="wrap">
+<span class="chip">Roadmap</span>
+<h2>Lo que existe y lo que viene</h2>
+<p class="sub">La versión 1 es lo que está hoy en el repo. Las fases siguientes dependen del uso real.</p>
+<div class="phase"><div class="tag">v1</div><div class="d"><strong>Kit de diez modelos + dos herramientas</strong><span>Publicado en set/2026 junto con el curso de origen. Sello de las herramientas Microsoft: set/2026.</span></div></div>
+<div class="phase"><div class="tag">sig.</div><div class="d"><strong>Rutas por módulo del curso</strong><span>La formación de origen tiene 8 módulos y 50–58 h; el curso actual cubre todo en 9 clases. Cada módulo puede convertirse en una ruta propia, y al kit se le agregan las plantillas que falten.</span></div></div>
+<div class="phase"><div class="tag">sig.</div><div class="d"><strong>check-v5 dentro de la skill revisar-curso</strong><span>El verificador empieza a ejecutarse automáticamente en la auditoría de cursos v5, en lugar de ejecutarse manualmente.</span></div></div>
+<div class="phase"><div class="tag">idea</div><div class="d"><strong>Kit en PDF y en Word</strong><span>Para quienes prefieren imprimir el canvas y las listas de verificación, o pegar los modelos en un documento de la empresa.</span></div></div>
+</div></section>
+<footer>
+<div class="wrap">
+<div class="pill">Markdown</div><div class="pill">Python 3</div><div class="pill">Node + Playwright</div><div class="pill">Microsoft 365 Copilot</div><div class="pill">Copilot Studio</div><div class="pill">Power Automate</div><div class="pill">Power BI</div>
+<p style="margin-top:18px">copilot-agentes-kit · material de investigación y enseñanza, casos ficticios ·
+      <a href="https://github.com/inematds/copilot-agentes-kit">inematds/copilot-agentes-kit</a> ·
+      <a href="https://inematds.github.io/copilot-agentic/">curso de origen</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+  (function(){
+    var KEY='copilot-agentes-kit-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
