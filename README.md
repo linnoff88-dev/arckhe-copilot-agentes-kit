@@ -1,4 +1,4 @@
-﻿# copilot-agentes-kit
+# copilot-agentes-kit
 
 <div align="center">
   <img src="capa/logo.svg" alt="Arckhé AI" height="48" />
@@ -10,15 +10,15 @@
 
 Kit prÃ¡tico de **Copilot + Agentes para Empresas**: os modelos que a pessoa copia e usa no
 trabalho (canvas, prompts, instruÃ§Ãµes de agente, fluxos, checklists de integraÃ§Ã£o e governanÃ§a,
-fichas de indicador, plano de trÃªs fases) e duas **ferramentas de verificaÃ§Ã£o** para cursos INEMA
+fichas de indicador, plano de trÃªs fases) e duas **ferramentas de verificaÃ§Ã£o** para cursos ARCKHÉ
 no formato v5 (verificador por aula e teste headless do motor).
 
-Nasceu do curso [Copilot + Agentes para Empresas](https://inematds.github.io/copilot-agentic/)
-(INEMA.CLUB PRO, 9 aulas, formato v5). O curso ensina; este repo entrega o que se leva para a
+Nasceu do curso [Copilot + Agentes para Empresas](https://linnoff88-dev.github.io/
+(ARCKHÉ AI PRO, 9 aulas, formato v5). O curso ensina; este repo entrega o que se leva para a
 segunda-feira.
 
-- Guia de uso (pÃ¡gina): https://inematds.github.io/copilot-agentes-kit/guia/
-- Curso de origem: https://inematds.github.io/copilot-agentic/
+- Guia de uso (pÃ¡gina): https://linnoff88-dev.github.io/
+- Curso de origem: https://linnoff88-dev.github.io/
 
 ---
 
@@ -51,7 +51,7 @@ disponibilidade variam por licenÃ§a e por empresa; a lÃ³gica nÃ£o.
 
 ---
 
-## 2. As ferramentas (`tools/`) â€” verificaÃ§Ã£o de cursos INEMA v5
+## 2. As ferramentas (`tools/`) â€” verificaÃ§Ã£o de cursos ARCKHÉ v5
 
 Duas ferramentas que nasceram na produÃ§Ã£o do curso e servem para qualquer curso no formato v5
 (e o teste do motor, tambÃ©m para v4).
@@ -109,7 +109,7 @@ markup da aula nÃ£o estÃ¡ no contrato (ver `formato-curso-v5/SKILL.md`).
 2. Ao fechar cada aula: `python3 tools/check-v5.py parts/NN-aula.html` â†’ corrija atÃ© zerar avisos, ajuste o `data-tempo` para o estimado (ou acima) e sincronize o card da trilha.
 3. Concatene em `curso.html`, escreva `landing.html`, `index.html` (redirect) e `.nojekyll`.
 4. `node tools/browser-test.cjs .` â†’ `ERROS: nenhum`.
-5. Capa via `capa-inema`, `git push`, GitHub Pages, catÃ¡logo via `atualiza-portal`.
+5. Capa via `capa-ARCKHÉ`, `git push`, GitHub Pages, catÃ¡logo via `atualiza-portal`.
 
 ---
 
@@ -129,7 +129,7 @@ copilot-agentes-kit/
 ## 5. Origem e licenÃ§a
 
 ConteÃºdo derivado da formaÃ§Ã£o "Copilot + Agentes para Empresas â€” Do trabalho com IA Ã  automaÃ§Ã£o
-dos processos corporativos" (INEMA, set/2026). Material de pesquisa e ensino; os casos (tÃ©cnica de
+dos processos corporativos" (ARCKHÉ, set/2026). Material de pesquisa e ensino; os casos (tÃ©cnica de
 seguranÃ§a do trabalho, analista de compras, gestora de RH, coordenador financeiro) sÃ£o fictÃ­cios.
 ReferÃªncias oficiais: [Microsoft 365 Copilot](https://learn.microsoft.com/microsoft-365-copilot/) Â·
 [Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/) Â·
