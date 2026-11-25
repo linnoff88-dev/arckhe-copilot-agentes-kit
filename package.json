@@ -2,7 +2,7 @@
   "name": "copilot-agentes-kit",
   "version": "1.0.0",
   "private": true,
-  "description": "Kit prÃ¡tico Copilot + Agentes para Empresas + ferramentas de verificaÃ§Ã£o de cursos ARCKHÉ v5",
+  "description": "Kit prático Copilot + Agentes para Empresas + ferramentas de verificaçêo de cursos ARCKH� v5",
   "scripts": {
     "check": "python3 tools/check-v5.py",
     "test:browser": "node tools/browser-test.cjs"

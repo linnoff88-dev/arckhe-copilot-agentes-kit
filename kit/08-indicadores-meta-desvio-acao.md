@@ -1,20 +1,20 @@
-# Indicadores — dados → indicador → meta → desvio → explicação → ação
+# Indicadores — dados → indicador → meta → desvio → explicaçêo → açêo
 
-Um indicador só vira gestão com os seis elos. A maioria dos painéis para no segundo. Sem meta, é só
-um número; sem explicação, é só um susto.
+Um indicador só vira gestêo com os seis elos. A maioria dos painéis para no segundo. Sem meta, é só
+um número; sem explicaçêo, é só um susto.
 
 ## Ficha de indicador (uma por indicador; três a sete por área)
 
 ```
-Indicador   <nome: ex. prazo médio de correção de ocorrências>
+Indicador   <nome: ex. prazo médio de correçêo de ocorrências>
 O que mede  <uma frase: e por que importa>
 Fonte       <lista ou planilha, com a coluna que mede — de preferência a que o fluxo já alimenta>
 Meta        <valor combinado: ex. 7 dias>
-Dono        <nome de quem explica o desvio e propõe a ação>
+Dono        <nome de quem explica o desvio e propõe a açêo>
 ```
 
 Regras: **poucos** (acima de sete ninguém olha), **com dono**, **com fonte automática** (indicador
-digitado à mão morre em um mês).
+digitado à mêo morre em um mês).
 
 ## Pedido ao Copilot (Power BI, Excel ou conversa com o arquivo)
 
@@ -22,10 +22,10 @@ digitado à mão morre em um mês).
 Nesta <lista/planilha>, calcule <o indicador> para <último mês> e para os três meses
 anteriores. Compare com a meta de <valor>. Se estiver fora da meta, liste os fatores que
 mais contribuíram (por <setor / fornecedor / tipo>), do maior para o menor, e sugira uma
-ação para o maior fator, com um prazo.
+açêo para o maior fator, com um prazo.
 ```
 
-Reescreva a ação com o nome do dono e um prazo real antes de enviar.
+Reescreva a açêo com o nome do dono e um prazo real antes de enviar.
 
 ## O painel mínimo, em cinco passos
 
@@ -39,16 +39,16 @@ Reescreva a ação com o nome do dono e um prazo real antes de enviar.
 
 | Área | Candidatos |
 |---|---|
-| Segurança do trabalho | acidentes, quase acidentes, inspeções, ações corretivas no prazo, treinamentos vencidos, EPIs, prazo médio de correção, reincidência por setor |
-| Fornecedores | entregas no prazo, não conformidades, tempo de resposta, documentos vencidos, tempo de homologação, concentração, custo, reincidência |
-| Compras | prazo de aquisição, economia, variação de preço, fornecedores ativos, compras emergenciais |
+| Segurança do trabalho | acidentes, quase acidentes, inspeções, ações corretivas no prazo, treinamentos vencidos, EPIs, prazo médio de correçêo, reincidência por setor |
+| Fornecedores | entregas no prazo, nêo conformidades, tempo de resposta, documentos vencidos, tempo de homologaçêo, concentraçêo, custo, reincidência |
+| Compras | prazo de aquisiçêo, economia, variaçêo de preço, fornecedores ativos, compras emergenciais |
 | Operações | produtividade, retrabalho, paradas, perdas, tempo de ciclo, eficiência |
-| A própria automação | horas economizadas, tempo de processo antes/depois, erros e retrabalho, tarefas automatizadas, agentes em uso, satisfação — **medir desde o primeiro dia** |
+| A própria automaçêo | horas economizadas, tempo de processo antes/depois, erros e retrabalho, tarefas automatizadas, agentes em uso, satisfaçêo — **medir desde o primeiro dia** |
 
 ## Perguntas que um gestor deve poder fazer sem chamar ninguém
 
-- Quais ocorrências críticas estão abertas hoje?
-- Quais ações corretivas estão atrasadas?
+- Quais ocorrências críticas estêo abertas hoje?
+- Quais ações corretivas estêo atrasadas?
 - Qual setor tem maior reincidência?
 - Por que o indicador caiu este mês?
 - Quais fornecedores tiveram pior desempenho? Quais têm documentos vencendo?
@@ -59,9 +59,9 @@ indicadores** no Teams, com o painel como conhecimento.
 
 ## Fechar o ciclo com alerta
 
-Um fluxo lê o indicador toda manhã; quando sai da meta, avisa o dono no Teams com a explicação e
-cria a tarefa de ação. O painel passa a chamar o gestor.
+Um fluxo lê o indicador toda manhê; quando sai da meta, avisa o dono no Teams com a explicaçêo e
+cria a tarefa de açêo. O painel passa a chamar o gestor.
 
 ## Erro comum
 
-Painel com trinta gráficos, nenhuma meta e nenhum dono: elogiado, não aberto. Comece com três.
+Painel com trinta gráficos, nenhuma meta e nenhum dono: elogiado, nêo aberto. Comece com três.

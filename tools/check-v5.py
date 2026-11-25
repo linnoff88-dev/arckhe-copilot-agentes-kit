@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""check-v5.py â€” verificador do formato-curso v5 (ARCKHÉ), por aula ou arquivo inteiro.
+"""check-v5.py ê¢â¬â verificador do formato-curso v5 (ARCKHê), por aula ou arquivo inteiro.
 
 Uso:
   python3 tools/check-v5.py curso.html            # arquivo inteiro (agrega)
-  python3 tools/check-v5.py parts/01-aula.html â€¦  # uma parte por aula (recomendado)
+  python3 tools/check-v5.py parts/01-aula.html ê¢â¬Â¦  # uma parte por aula (recomendado)
 
-Checa: tempo estimado (palavras/200 + prÃ¡tica + 30s/quiz) vs data-tempo Â· jargÃ£o-sentinela Â·
-cobertura data-fig stepâ†”rail Â· contagens (promise/why/practice/psafe/recap/next/cards/gterm/quadros/
-manifesto/[AUSENTE]) Â· JSON dos cartÃµes Â· anti-duplicaÃ§Ã£o recapâ†”cartÃ£o (â‰¥6 palavras) Â· cartÃ£o sem
-forma de pergunta Â· emoji / exclamaÃ§Ã£o dupla Â· frases muito longas. SÃ³ imprime; nÃ£o altera nada."""
+Checa: tempo estimado (palavras/200 + prêÂ¡tica + 30s/quiz) vs data-tempo êÂ· jargêÂ£o-sentinela êÂ·
+cobertura data-fig stepê¢â ârail êÂ· contagens (promise/why/practice/psafe/recap/next/cards/gterm/quadros/
+manifesto/[AUSENTE]) êÂ· JSON dos cartêÂµes êÂ· anti-duplicaêÂ§êÂ£o recapê¢â âcartêÂ£o (ê¢â°Â¥6 palavras) êÂ· cartêÂ£o sem
+forma de pergunta êÂ· emoji / exclamaêÂ§êÂ£o dupla êÂ· frases muito longas. SêÂ³ imprime; nêÂ£o altera nada."""
 import re, sys, json, math, html
 
-SENT = r"\bJSON\b|\bterminal\b|\bGit\b|reposit[Ã³o]rio|\bcommit\b|\bbranch\b|\bpipeline\b|arquivo de configura|\binstalar\b|\bscript\b|\bservidor\b|\bAPI\b|\bdeploy\b|\bCLI\b|diret[Ã³o]rio|\bplugin\b|\bencoding\b"
+SENT = r"\bJSON\b|\bterminal\b|\bGit\b|reposit[êÂ³o]rio|\bcommit\b|\bbranch\b|\bpipeline\b|arquivo de configura|\binstalar\b|\bscript\b|\bservidor\b|\bAPI\b|\bdeploy\b|\bCLI\b|diret[êÂ³o]rio|\bplugin\b|\bencoding\b"
 
 def strip(s):
     s = re.sub(r"<!--.*?-->", " ", s, flags=re.S)
@@ -20,7 +20,7 @@ def strip(s):
     s = re.sub(r"<[^>]+>", " ", s)
     return html.unescape(s)
 
-def words(s): return re.findall(r"[\wÃ€-Ã¿'-]+", s)
+def words(s): return re.findall(r"[\wêâ¬-êÂ¿'-]+", s)
 
 for path in sys.argv[1:]:
     raw = open(path, encoding="utf-8").read()
@@ -35,7 +35,7 @@ for path in sys.argv[1:]:
     est = math.ceil(n/200 + pmin + quizzes*0.5)
     dt = re.search(r'data-tempo="(\d+)min"', raw)
     print(f"== {path}")
-    print(f"   palavras={n} quiz={quizzes} pratica~{pmin}min â†’ estimado {est}min | data-tempo={dt.group(1) if dt else 'AUSENTE'}")
+    print(f"   palavras={n} quiz={quizzes} pratica~{pmin}min ê¢â â estimado {est}min | data-tempo={dt.group(1) if dt else 'AUSENTE'}")
     # contagens
     for k, pat in [("steps", r'class="step"'), ("figs", r'class="fig(?: on)?"'), ("mobfig", r'class="mobfig"'),
                    ("promise", r'class="promise"'), ("why", r'class="why"'), ("practice", r'class="practice"'),
@@ -58,9 +58,9 @@ for path in sys.argv[1:]:
         s = max(0, m.start()-60); e = min(len(body), m.end()+60)
         print("   SENTINELA:", re.sub(r"\s+", " ", body[s:e]))
     # emoji
-    em = re.findall(r"[\U0001F300-\U0001FAFFâ˜€-âž¿]", txt)
+    em = re.findall(r"[\U0001F300-\U0001FAFFê¢Ëâ¬-ê¢Å¾Â¿]", txt)
     if em: print("   EMOJI:", em)
-    if "!!" in txt: print("   EXCLAMAÃ‡ÃƒO DUPLA")
+    if "!!" in txt: print("   EXCLAMAêâ¡êÆO DUPLA")
     # anti-dup recap vs cards
     rc = re.search(r'<div class="recap-autor">(.*?)</div>', raw, re.S)
     cd = re.search(r'<script type="application/json" id="cards-\d+">(.*?)</script>', raw, re.S)
@@ -70,14 +70,14 @@ for path in sys.argv[1:]:
         try:
             cards = json.loads(cd.group(1))
         except Exception as ex:
-            print("   CARDS JSON INVÃLIDO:", ex); cards = []
+            print("   CARDS JSON INVêÂLIDO:", ex); cards = []
         for c in cards:
             cw = [w.lower() for w in words(c["front"]+" "+c["back"])]
             hit = [g for g in (tuple(cw[i:i+6]) for i in range(len(cw)-5)) if g in grams]
-            if hit: print("   DUPLICAÃ‡ÃƒO â‰¥6:", " ".join(hit[0]))
+            if hit: print("   DUPLICAêâ¡êÆO ê¢â°Â¥6:", " ".join(hit[0]))
             f = c["front"].strip()
             if not (f.endswith("?") or re.search(r"\?", f)):
-                print("   CARTÃƒO SEM PERGUNTA:", f[:60])
+                print("   CARTêÆO SEM PERGUNTA:", f[:60])
         print(f"   cards={len(cards)} anti-dup verificado")
     # frases longas (>25 palavras) em prosa dos steps
     long_ = 0
