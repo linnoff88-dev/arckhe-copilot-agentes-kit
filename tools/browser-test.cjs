@@ -1,4 +1,4 @@
-// browser-test.cjs — teste headless do motor de um curso INEMA v4/v5 (curso.html + landing.html).
+// browser-test.cjs — teste headless do motor de um curso ARCKHÉ v4/v5 (curso.html + landing.html).
 // Uso: node tools/browser-test.cjs <pasta-do-curso> [pasta-de-screenshots]
 // Precisa do Playwright: npm i -D playwright && npx playwright install chromium
 // (ou um node_modules com playwright em ../ ou no caminho indicado por PLAYWRIGHT_DIR).
